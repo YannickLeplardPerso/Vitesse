@@ -8,6 +8,7 @@
 import Foundation
 
 class CandidatesListViewModel: ObservableObject {
+    @Published var research: String = ""
 //    @Published var firstName: String = ""
 //    @Published var lastName: String = ""
 //    @Published var email: String = ""

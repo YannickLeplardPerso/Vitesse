@@ -18,6 +18,9 @@
 		AC4E440D2C14B6460024EE52 /* CandidatesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E440A2C14B6460024EE52 /* CandidatesListView.swift */; };
 		AC4E440F2C14B7310024EE52 /* MockCandidatesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E440E2C14B7310024EE52 /* MockCandidatesList.swift */; };
 		AC4E44112C14B7A00024EE52 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44102C14B7A00024EE52 /* Candidate.swift */; };
+		AC4E44132C1504950024EE52 /* CandidateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44122C1504950024EE52 /* CandidateView.swift */; };
+		AC4E44152C1504B00024EE52 /* CandidateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44142C1504B00024EE52 /* CandidateViewModel.swift */; };
+		AC641CD22C16D78700644E9F /* CandidateEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CD12C16D78700644E9F /* CandidateEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		AC4E440A2C14B6460024EE52 /* CandidatesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidatesListView.swift; sourceTree = "<group>"; };
 		AC4E440E2C14B7310024EE52 /* MockCandidatesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCandidatesList.swift; sourceTree = "<group>"; };
 		AC4E44102C14B7A00024EE52 /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		AC4E44122C1504950024EE52 /* CandidateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateView.swift; sourceTree = "<group>"; };
+		AC4E44142C1504B00024EE52 /* CandidateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateViewModel.swift; sourceTree = "<group>"; };
+		AC641CD12C16D78700644E9F /* CandidateEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,9 +92,10 @@
 		AC4E43FF2C14B5DB0024EE52 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				AC4E44042C14B63D0024EE52 /* CandidatesListViewModel.swift */,
 				AC4E44032C14B63D0024EE52 /* LoginViewModel.swift */,
 				AC4E44022C14B63D0024EE52 /* RegisterViewModel.swift */,
+				AC4E44042C14B63D0024EE52 /* CandidatesListViewModel.swift */,
+				AC4E44142C1504B00024EE52 /* CandidateViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -96,9 +103,11 @@
 		AC4E44002C14B5ED0024EE52 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AC4E440A2C14B6460024EE52 /* CandidatesListView.swift */,
 				AC4E44092C14B6460024EE52 /* LoginView.swift */,
 				AC4E44082C14B6460024EE52 /* RegisterView.swift */,
+				AC4E440A2C14B6460024EE52 /* CandidatesListView.swift */,
+				AC4E44122C1504950024EE52 /* CandidateView.swift */,
+				AC641CD12C16D78700644E9F /* CandidateEditView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,12 +191,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC641CD22C16D78700644E9F /* CandidateEditView.swift in Sources */,
 				AC4E44072C14B63D0024EE52 /* CandidatesListViewModel.swift in Sources */,
 				AC4E440F2C14B7310024EE52 /* MockCandidatesList.swift in Sources */,
 				AC4E440C2C14B6460024EE52 /* LoginView.swift in Sources */,
 				AC4E440D2C14B6460024EE52 /* CandidatesListView.swift in Sources */,
 				AC4E44062C14B63D0024EE52 /* LoginViewModel.swift in Sources */,
 				AC4E440B2C14B6460024EE52 /* RegisterView.swift in Sources */,
+				AC4E44152C1504B00024EE52 /* CandidateViewModel.swift in Sources */,
+				AC4E44132C1504950024EE52 /* CandidateView.swift in Sources */,
 				AC4E44112C14B7A00024EE52 /* Candidate.swift in Sources */,
 				AC4E44052C14B63D0024EE52 /* RegisterViewModel.swift in Sources */,
 				AC4E43F22C14B48F0024EE52 /* VitesseApp.swift in Sources */,

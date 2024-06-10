@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct CandidatesListView: View {
+    @ObservedObject var viewModel: CandidatesListViewModel
     
     let candidates = MockCandidatesList().all
     
     var body: some View {
         VStack {
-            // todo : ligne Edit Candidates Star
             HStack {
                 Button(action: {
                     // fonction d'édition
@@ -28,10 +28,37 @@ struct CandidatesListView: View {
                 
                 Spacer()
                 
-                Image(systemName: "star")
+                Button(action: {
+                    // affiche uniquement les favoris
+                }) {
+                    Image(systemName: "star")
+                }
             }
             .padding()
-            // todo ligne research avec loupe dans champ à gauche
+//            .padding(.horizontal)
+//            .padding(.top)
+            
+            VStack {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                    TextField("Search", text: $viewModel.research)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .padding()
+                        
+                }
+                .padding(.horizontal)
+            }
+            .padding(.horizontal)
+            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+            
+//            Form {
+//             Section {
+//                HStack {
+//                  Image(systemName: "magnifyingglass")
+//                  TextField("Search", text: $viewModel.research)
+//                }
+//              }
+//            }
             
             List(candidates) { candidate in
                 HStack {
@@ -44,19 +71,11 @@ struct CandidatesListView: View {
                     Image(systemName: candidate.isFavorite ? "star.fill" : "star")
                         .foregroundColor(candidate.isFavorite ? .cyan : .gray)
                 }
-                //.padding(.vertical, 5)
-//                .frame(maxWidth: .infinity) // Ensure the HStack spans the full width
-//                                .background(
-//                                    LinearGradient(gradient: Gradient(colors: [.cyan, .white]), startPoint: .leading, endPoint: .trailing)
-//                                )
             }
-            .listRowInsets(EdgeInsets())
-            //.background(Color.cyan)
         }
-        //.background(Color.cyan)
     }
 }
 
 #Preview {
-    CandidatesListView()
+    CandidatesListView(viewModel: CandidatesListViewModel())
 }

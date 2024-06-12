@@ -35,8 +35,6 @@ struct CandidatesListView: View {
                 }
             }
             .padding()
-//            .padding(.horizontal)
-//            .padding(.top)
             
             VStack {
                 HStack {
@@ -50,15 +48,6 @@ struct CandidatesListView: View {
             }
             .padding(.horizontal)
             .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-            
-//            Form {
-//             Section {
-//                HStack {
-//                  Image(systemName: "magnifyingglass")
-//                  TextField("Search", text: $viewModel.research)
-//                }
-//              }
-//            }
             
             List(candidates) { candidate in
                 HStack {

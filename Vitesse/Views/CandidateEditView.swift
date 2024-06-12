@@ -108,20 +108,17 @@ struct CandidateEditView: View {
                 TextEditor(text: Binding(
                     get: { viewModel.candidate.note ?? "" },
                     set: { viewModel.candidate.note = $0.isEmpty ? nil : $0 }))
-                    .padding()
                     //.frame(minHeight: 100)
-                    .background(Color(UIColor.secondarySystemBackground))
+                    //.background(Color(UIColor.secondarySystemBackground))
                     .font(.title3)
                     .foregroundStyle(.cyan)
-                    .fontWeight(.semibold)
-                    .cornerRadius(8)
-                    .background(
+                    .overlay(
                         RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.cyan, lineWidth: 2)
                     )
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .disableAutocorrection(true)
-                    .padding(.bottom, 20)
             }
             
             Spacer()

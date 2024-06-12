@@ -9,13 +9,13 @@ import Foundation
 
 
 
-struct Candidate: Identifiable {
-    var id: String
-    var firstName: String
-    var lastName: String
+struct VCandidate: Identifiable {
+    let id: String
+    let firstName: String
+    let lastName: String
     var email: String
     var phone: String
-    var isFavorite: Bool
+    let isFavorite: Bool
     var linkedinURL: String?
     var note: String?
 }

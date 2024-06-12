@@ -10,5 +10,5 @@ import Foundation
 
 
 class CandidateViewModel: ObservableObject {
-    @Published var candidate: Candidate = MockCandidatesList().all.last!
+    @Published var candidate: VCandidate = MockCandidatesList().all.first!
 }

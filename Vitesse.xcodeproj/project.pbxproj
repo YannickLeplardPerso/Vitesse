@@ -17,10 +17,22 @@
 		AC4E440C2C14B6460024EE52 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44092C14B6460024EE52 /* LoginView.swift */; };
 		AC4E440D2C14B6460024EE52 /* CandidatesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E440A2C14B6460024EE52 /* CandidatesListView.swift */; };
 		AC4E440F2C14B7310024EE52 /* MockCandidatesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E440E2C14B7310024EE52 /* MockCandidatesList.swift */; };
-		AC4E44112C14B7A00024EE52 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44102C14B7A00024EE52 /* Candidate.swift */; };
+		AC4E44112C14B7A00024EE52 /* VCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44102C14B7A00024EE52 /* VCandidate.swift */; };
 		AC4E44132C1504950024EE52 /* CandidateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44122C1504950024EE52 /* CandidateView.swift */; };
 		AC4E44152C1504B00024EE52 /* CandidateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44142C1504B00024EE52 /* CandidateViewModel.swift */; };
 		AC641CD22C16D78700644E9F /* CandidateEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CD12C16D78700644E9F /* CandidateEditView.swift */; };
+		AC641CD42C16F2E600644E9F /* VAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CD32C16F2E600644E9F /* VAPIService.swift */; };
+		AC641CD62C16F9BF00644E9F /* VError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CD52C16F9BF00644E9F /* VError.swift */; };
+		AC641CD82C17434300644E9F /* VState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CD72C17434300644E9F /* VState.swift */; };
+		AC641CDD2C1788BA00644E9F /* VCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CDC2C1788BA00644E9F /* VCheck.swift */; };
+		AC641CDF2C178A0600644E9F /* VCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CDE2C178A0600644E9F /* VCredentials.swift */; };
+		AC641CE12C178A3100644E9F /* VToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CE02C178A3100644E9F /* VToken.swift */; };
+		AC641CE42C178F7500644E9F /* VTitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CE32C178F7500644E9F /* VTitleText.swift */; };
+		AC641CE62C17903B00644E9F /* VTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CE52C17903B00644E9F /* VTextField.swift */; };
+		AC641CE92C179C5E00644E9F /* VButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CE82C179C5E00644E9F /* VButton.swift */; };
+		ACED6C2C2C18A88900F60714 /* VTexttError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACED6C2B2C18A88900F60714 /* VTexttError.swift */; };
+		ACED6C2E2C18D72900F60714 /* VNewUserInformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACED6C2D2C18D72900F60714 /* VNewUserInformations.swift */; };
+		ACED6C302C18EC7700F60714 /* VDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACED6C2F2C18EC7700F60714 /* VDestination.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,10 +47,22 @@
 		AC4E44092C14B6460024EE52 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AC4E440A2C14B6460024EE52 /* CandidatesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidatesListView.swift; sourceTree = "<group>"; };
 		AC4E440E2C14B7310024EE52 /* MockCandidatesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCandidatesList.swift; sourceTree = "<group>"; };
-		AC4E44102C14B7A00024EE52 /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		AC4E44102C14B7A00024EE52 /* VCandidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCandidate.swift; sourceTree = "<group>"; };
 		AC4E44122C1504950024EE52 /* CandidateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateView.swift; sourceTree = "<group>"; };
 		AC4E44142C1504B00024EE52 /* CandidateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateViewModel.swift; sourceTree = "<group>"; };
 		AC641CD12C16D78700644E9F /* CandidateEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateEditView.swift; sourceTree = "<group>"; };
+		AC641CD32C16F2E600644E9F /* VAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAPIService.swift; sourceTree = "<group>"; };
+		AC641CD52C16F9BF00644E9F /* VError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VError.swift; sourceTree = "<group>"; };
+		AC641CD72C17434300644E9F /* VState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VState.swift; sourceTree = "<group>"; };
+		AC641CDC2C1788BA00644E9F /* VCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheck.swift; sourceTree = "<group>"; };
+		AC641CDE2C178A0600644E9F /* VCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCredentials.swift; sourceTree = "<group>"; };
+		AC641CE02C178A3100644E9F /* VToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToken.swift; sourceTree = "<group>"; };
+		AC641CE32C178F7500644E9F /* VTitleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTitleText.swift; sourceTree = "<group>"; };
+		AC641CE52C17903B00644E9F /* VTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextField.swift; sourceTree = "<group>"; };
+		AC641CE82C179C5E00644E9F /* VButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VButton.swift; sourceTree = "<group>"; };
+		ACED6C2B2C18A88900F60714 /* VTexttError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTexttError.swift; sourceTree = "<group>"; };
+		ACED6C2D2C18D72900F60714 /* VNewUserInformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNewUserInformations.swift; sourceTree = "<group>"; };
+		ACED6C2F2C18EC7700F60714 /* VDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDestination.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				AC4E43F12C14B48F0024EE52 /* VitesseApp.swift */,
+				AC641CDB2C17888800644E9F /* Utils */,
 				AC4E44012C14B5F90024EE52 /* Model */,
 				AC4E43FF2C14B5DB0024EE52 /* ViewModels */,
 				AC4E44002C14B5ED0024EE52 /* Views */,
@@ -103,6 +128,7 @@
 		AC4E44002C14B5ED0024EE52 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AC641CE22C178F1800644E9F /* Components */,
 				AC4E44092C14B6460024EE52 /* LoginView.swift */,
 				AC4E44082C14B6460024EE52 /* RegisterView.swift */,
 				AC4E440A2C14B6460024EE52 /* CandidatesListView.swift */,
@@ -115,10 +141,36 @@
 		AC4E44012C14B5F90024EE52 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AC4E44102C14B7A00024EE52 /* Candidate.swift */,
-				AC4E440E2C14B7310024EE52 /* MockCandidatesList.swift */,
+				AC641CD52C16F9BF00644E9F /* VError.swift */,
+				AC641CD72C17434300644E9F /* VState.swift */,
+				ACED6C2F2C18EC7700F60714 /* VDestination.swift */,
+				AC641CD32C16F2E600644E9F /* VAPIService.swift */,
+				AC4E44102C14B7A00024EE52 /* VCandidate.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		AC641CDB2C17888800644E9F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AC4E440E2C14B7310024EE52 /* MockCandidatesList.swift */,
+				AC641CDC2C1788BA00644E9F /* VCheck.swift */,
+				AC641CDE2C178A0600644E9F /* VCredentials.swift */,
+				AC641CE02C178A3100644E9F /* VToken.swift */,
+				ACED6C2D2C18D72900F60714 /* VNewUserInformations.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AC641CE22C178F1800644E9F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AC641CE32C178F7500644E9F /* VTitleText.swift */,
+				AC641CE52C17903B00644E9F /* VTextField.swift */,
+				AC641CE82C179C5E00644E9F /* VButton.swift */,
+				ACED6C2B2C18A88900F60714 /* VTexttError.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,16 +245,28 @@
 			files = (
 				AC641CD22C16D78700644E9F /* CandidateEditView.swift in Sources */,
 				AC4E44072C14B63D0024EE52 /* CandidatesListViewModel.swift in Sources */,
+				ACED6C2E2C18D72900F60714 /* VNewUserInformations.swift in Sources */,
+				AC641CDF2C178A0600644E9F /* VCredentials.swift in Sources */,
+				ACED6C2C2C18A88900F60714 /* VTexttError.swift in Sources */,
+				AC641CE92C179C5E00644E9F /* VButton.swift in Sources */,
 				AC4E440F2C14B7310024EE52 /* MockCandidatesList.swift in Sources */,
 				AC4E440C2C14B6460024EE52 /* LoginView.swift in Sources */,
 				AC4E440D2C14B6460024EE52 /* CandidatesListView.swift in Sources */,
+				AC641CE62C17903B00644E9F /* VTextField.swift in Sources */,
 				AC4E44062C14B63D0024EE52 /* LoginViewModel.swift in Sources */,
+				AC641CE12C178A3100644E9F /* VToken.swift in Sources */,
 				AC4E440B2C14B6460024EE52 /* RegisterView.swift in Sources */,
+				AC641CD82C17434300644E9F /* VState.swift in Sources */,
 				AC4E44152C1504B00024EE52 /* CandidateViewModel.swift in Sources */,
 				AC4E44132C1504950024EE52 /* CandidateView.swift in Sources */,
-				AC4E44112C14B7A00024EE52 /* Candidate.swift in Sources */,
+				AC4E44112C14B7A00024EE52 /* VCandidate.swift in Sources */,
+				AC641CE42C178F7500644E9F /* VTitleText.swift in Sources */,
+				AC641CD62C16F9BF00644E9F /* VError.swift in Sources */,
 				AC4E44052C14B63D0024EE52 /* RegisterViewModel.swift in Sources */,
 				AC4E43F22C14B48F0024EE52 /* VitesseApp.swift in Sources */,
+				ACED6C302C18EC7700F60714 /* VDestination.swift in Sources */,
+				AC641CDD2C1788BA00644E9F /* VCheck.swift in Sources */,
+				AC641CD42C16F2E600644E9F /* VAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,7 +398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = "4 en cours";
 				DEVELOPMENT_ASSET_PATHS = "\"Vitesse/Preview Content\"";
 				DEVELOPMENT_TEAM = 9L643QCQAN;
 				ENABLE_PREVIEWS = YES;
@@ -363,7 +427,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = "4 en cours";
 				DEVELOPMENT_ASSET_PATHS = "\"Vitesse/Preview Content\"";
 				DEVELOPMENT_TEAM = 9L643QCQAN;
 				ENABLE_PREVIEWS = YES;

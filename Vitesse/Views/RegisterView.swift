@@ -8,100 +8,72 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @ObservedObject var viewModel: RegisterViewModel
+    @StateObject var viewModel: RegisterViewModel
+    @EnvironmentObject var vstate: VState
+    
+    @State private var isOkForNewDestination: Bool = false
+    @State private var p1: String = ""
+    @State private var p2: String = ""
     
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [.cyan, .white]), startPoint: .top, endPoint: .bottomLeading)
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 20) {
+        NavigationStack {
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.cyan, .white]), startPoint: .top, endPoint: .bottomLeading)
+                    .edgesIgnoringSafeArea(.all)
                 
-                Spacer()
-                
-                Text("Register")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.bottom, 40)
-                
-                Text("First Name")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, -10)
-                TextField("First Name", text: $viewModel.firstName)
-                    .padding()
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                    )
-                    .autocapitalization(.none)
-                    .keyboardType(.emailAddress)
-                    .disableAutocorrection(true)
-                    .padding(.bottom, 20)
-                
-                Text("Last Name")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, -10)
-                TextField("Last Name", text: $viewModel.lastName)
-                    .padding()
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                    )
-                    .autocapitalization(.none)
-                    .keyboardType(.emailAddress)
-                    .disableAutocorrection(true)
-                    .padding(.bottom, 20)
-                
-                Text("Password")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, -10)
-                SecureField("Password", text: $viewModel.newPassword)
-                    .padding()
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                    )
-                    .padding(.bottom, 20)
-                
-                Text("Confirm Password")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, -10)
-                SecureField("Confirm Password", text: $viewModel.confirmNewPassword)
-                    .padding()
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                    )
+                VStack(spacing: 20) {
+                    VTitleText(text: "Register")
                     
-                Spacer()
-                
-                Button(action: {
-                }) {
-                    Text("Create")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: 120)
-                        .padding()
-                        .background(Color.black)
-                        .cornerRadius(8)
+                    // ? groups are used for avoid the limit of 10 views in a stack
+                    Group {
+                        VTextField(title: "Email", text: $viewModel.email, error: vstate.error)
+                            .keyboardType(.emailAddress)
+                        
+                        VTextField(title: "First Name", text: $viewModel.firstName, error: vstate.error)
+                        
+                        VTextField(title: "LastName", text: $viewModel.lastName, error: vstate.error)
+                    }
+                    
+                    Group {
+
+                        
+                        VTextField(title: "Password", text: $p1, isSecure: true, error: vstate.error)
+                            .textContentType(.newPassword)
+                        
+                        VTextField(title: "Confirm Password", text: $p2, isSecure: true, error: vstate.error)
+                            .textContentType(.newPassword)
+                    }
+                    
+                    if vstate.error != .No {
+                        VTextError(text: vstate.error.message)
+                    }
+                    
+                    VButton(action: {
+                        if viewModel.allInformationsAreValid(vstate: vstate) {
+                            // in progress
+                            //viewModel.register(vstate: vstate)
+                            isOkForNewDestination = true
+                        }
+                    }, title: "Create")
+                    .padding(.top, 30)
+                    
+                    Spacer()
                 }
-                
-                Spacer()
+                .padding(.horizontal, 40)
             }
-            .padding(.horizontal, 40)
-        }
-        .onTapGesture {
-//            self.endEditing(true)  // This will dismiss the keyboard when tapping outside
+            .onTapGesture {
+                //            self.endEditing(true)  // This will dismiss the keyboard when tapping outside
+            }
+            .navigationDestination(isPresented: $isOkForNewDestination) {
+                LoginView(viewModel: LoginViewModel())
+            }
         }
     }
-    
 }
 
 
 
 #Preview {
     RegisterView(viewModel: RegisterViewModel())
+        .environmentObject(VState())
 }

@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct VitesseApp: App {
+    @StateObject var vstate = VState()
+    
     var body: some Scene {
         WindowGroup {
-            //LoginView(viewModel: LoginViewModel())
-            CandidateView()
+            LoginView(viewModel: LoginViewModel())
         }
+        .environmentObject(vstate)
     }
 }

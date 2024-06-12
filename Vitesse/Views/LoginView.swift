@@ -7,87 +7,85 @@
 
 import SwiftUI
 
+
+
 struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel
+    @StateObject var viewModel = LoginViewModel()
+    @EnvironmentObject var vstate: VState
+    
+    @State private var isOkForNewDestination: Bool = false
+    @State private var destination: VDestination = .No
     
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [.cyan, .white]), startPoint: .top, endPoint: .bottomLeading)
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 20) {
+        NavigationStack {
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.viGradientTop, .viGradientBottom]), startPoint: .top, endPoint: .bottomLeading)
+                    .edgesIgnoringSafeArea(.all)
                 
-                Spacer()
-                
-                Text("Login")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.bottom, 40)
-                
-                Text("Email/Username")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, -10)
-                TextField("Adresse email", text: $viewModel.username)
-                    .padding()
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                    )
-                    .autocapitalization(.none)
-                    .keyboardType(.emailAddress)
-                    .disableAutocorrection(true)
-                    .padding(.bottom, 20)
-                
-                Text("Password")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, -10)
-                SecureField("Mot de passe", text: $viewModel.password)
-                    .padding()
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                    )
-                Text("Forgot password ?")
-                    .font(.footnote)
-                    .padding(.bottom, 40)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, -10)
-                        
-                Button(action: {
-                }) {
-                    Text("Sign in")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: 120)
-                        .padding()
-                        .background(Color.black) // You can also change this to your pastel green color
-                        .cornerRadius(8)
+                VStack(spacing: 20) {                    
+                    VTitleText(text: "Login")
+                    
+                    VTextField(title: "Email", text: $viewModel.email, error: vstate.error)
+                        .keyboardType(.emailAddress)
+                    
+                    VTextField(title: "Password", text: $viewModel.password, isSecure: true, error: vstate.error)
+                    Text("Forgot password ?")
+                        .foregroundColor(.viLightText)
+                        .font(.footnote)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.top, -12)
+                    
+                    if vstate.error != .No {
+                        VTextError(text: vstate.error.message)
+                    }
+                    
+                    VButton(action: {
+                        if viewModel.emailAndPasswordAreValid(vstate: vstate) {
+                            viewModel.login(vstate: vstate)
+                            if vstate.token != "" {
+                                navigate(to: .CandidatesList)
+                            }
+                        }
+                    }, title: "Sign in")
+                    .padding(.top, 30)
+                    
+                    VButton(action: {
+                        navigate(to: .Register)
+                    }, title: "Register")
+                    
+                    Spacer()
                 }
-                
-                Button(action: {
-                }) {
-                    Text("Register")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: 120)
-                        .padding()
-                        .background(Color.black) // You can also change this to your pastel green color
-                        .cornerRadius(8)
-                }
-                
-                Spacer()
+                .padding(.horizontal, 40)
             }
-            .padding(.horizontal, 40)
-        }
-        .onTapGesture {
-//            self.endEditing(true)  // This will dismiss the keyboard when tapping outside
+//            .onTapGesture {
+//                self.endEditing(true)
+//            }
+            .navigationDestination(isPresented: $isOkForNewDestination) {
+                if destination == .CandidatesList {
+                    CandidatesListView(viewModel: CandidatesListViewModel())
+                } else if destination == .Register {
+                    RegisterView(viewModel: RegisterViewModel())
+                }
+            }
         }
     }
     
+    private func navigate(to destination: VDestination) {
+        self.destination = destination
+        self.isOkForNewDestination = true
+        resetFields()
+    }
+    
+    private func resetFields() {
+        viewModel.email = ""
+        viewModel.password = ""
+        vstate.error = .No
+    }
 }
 
 
 
 #Preview {
     LoginView(viewModel: LoginViewModel())
+        .environmentObject(VState())
 }

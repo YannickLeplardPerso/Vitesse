@@ -13,14 +13,14 @@ struct VTextField: View {
     let title: String
     @Binding var text: String
     let isSecure: Bool
-    let error: VError
+    @Binding var error: VError
     
     // pour pouvoir avoir une valeur par défaut pour isSecure et rendre le paramètre optionnel pour un "simple" TextField
-    init(title: String, text: Binding<String>, isSecure: Bool = false, error: VError = .No) {
+    init(title: String, text: Binding<String>, error: Binding<VError>, isSecure: Bool = false) {
         self.title = title
         self._text = text
         self.isSecure = isSecure
-        self.error = error
+        self._error = error
     }
     
     var body: some View {
@@ -45,8 +45,10 @@ struct VTextField: View {
             )
             .autocapitalization(.none)
             .disableAutocorrection(true)
+            .onChange(of: text) {
+                error = .No
+            }
         }
-        
     }
 }
 

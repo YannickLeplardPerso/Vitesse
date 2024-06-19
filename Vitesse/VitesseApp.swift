@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct VitesseApp: App {
+    struct VitesseApp: App {
     @StateObject var vstate = VState()
     
     var body: some Scene {

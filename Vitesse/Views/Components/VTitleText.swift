@@ -17,7 +17,6 @@ struct VTitleText: View {
             .font(.largeTitle)
             .fontWeight(.bold)
             .foregroundColor(.viText)
-            //.padding(.bottom, 20)
             .padding(20)
     }
 }

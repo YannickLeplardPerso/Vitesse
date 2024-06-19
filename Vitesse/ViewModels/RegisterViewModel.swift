@@ -19,6 +19,7 @@ class RegisterViewModel: ObservableObject {
     func allInformationsAreValid(vstate: VState) -> Bool {
         // all the fields must be filled
         let fields = [email, firstName, lastName, newPassword, confirmNewPassword]
+        print(email, firstName, lastName, newPassword, confirmNewPassword)
         if fields.contains(where: { $0.isEmpty }) {
             vstate.error = .Empty
             return false
@@ -43,20 +44,21 @@ class RegisterViewModel: ObservableObject {
         return true
     }
     
-    func register(vstate: VState) {
-        Task{ @MainActor in
-            do{
-                try await apiService.registerNewUser(for: VNewUserInformations(email: email, password: newPassword, firstName: firstName, lastName: lastName))
-            } catch let urlError as URLError {
-                switch urlError.code {
-                case .cannotConnectToHost:
-                    vstate.error = .CantConnectHost
-                default:
-                    vstate.error = .GenericURLError
-                }
-            } catch {
-                vstate.error = .RequestResponse
+    @MainActor
+    func register(vstate: VState) async {
+        do {
+            try await apiService.registerNewUser(for: VNewUserInformations(email: email, password: newPassword, firstName: firstName, lastName: lastName))
+        } catch let urlError as URLError {
+            switch urlError.code {
+            case .cannotConnectToHost:
+                vstate.error = .CantConnectHost
+            default:
+                vstate.error = .GenericURLError
             }
+        } catch let error as VError {
+            vstate.error = error
+        } catch {
+            vstate.error = .GenericError
         }
     }
 }

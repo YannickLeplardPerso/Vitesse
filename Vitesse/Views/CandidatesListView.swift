@@ -9,62 +9,70 @@ import SwiftUI
 
 struct CandidatesListView: View {
     @ObservedObject var viewModel: CandidatesListViewModel
-    
-    let candidates = MockCandidatesList().all
-    
+    @EnvironmentObject var vstate: VState
+        
     var body: some View {
-        VStack {
-            HStack {
-                Button(action: {
-                    // fonction d'édition
-                }) {
-                    Text("Edit")
-                }
-                
-                Spacer()
-                
-                Text("Candidates")
-                    .fontWeight(.bold)
-                
-                Spacer()
-                
-                Button(action: {
-                    // affiche uniquement les favoris
-                }) {
-                    Image(systemName: "star")
-                }
-            }
-            .padding()
-            
+        NavigationStack {
             VStack {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    TextField("Search", text: $viewModel.research)
-                        .textFieldStyle(PlainTextFieldStyle())
-                        .padding()
-                        
-                }
-                .padding(.horizontal)
-            }
-            .padding(.horizontal)
-            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-            
-            List(candidates) { candidate in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(candidate.firstName) \(candidate.lastName)")
-                            .foregroundStyle(.cyan)
-                            .fontWeight(.semibold)
+                // research field
+                VStack {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.viText)
+                        TextField("Search", text: $viewModel.research)
+                            .textFieldStyle(PlainTextFieldStyle())
+                            .padding()
+                            
                     }
-                    Spacer()
-                    Image(systemName: candidate.isFavorite ? "star.fill" : "star")
-                        .foregroundColor(candidate.isFavorite ? .cyan : .gray)
+                    .padding(.horizontal)
+                }
+                .border(.viText)
+                .padding(.horizontal)
+                
+                let candidates = vstate.candidates
+                List(candidates) { candidate in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("\(candidate.firstName) \(candidate.lastName)")
+                                    .foregroundStyle(.viLightText)
+                                    .fontWeight(.semibold)
+                            }
+                            Spacer()
+                            Image(systemName: candidate.isFavorite ? "star.fill" : "star")
+                                .foregroundColor(candidate.isFavorite ? .viText : .viBackgroundField)
+                        }
+                    }
+                
+                Spacer()
+                
+            }
+            //.navigationTitle("Candidates")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        // fonction d'édition
+                    }) {
+                        Text("Edit")
+                    }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Candidates")
+                        .fontWeight(.bold)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        // affiche uniquement les favoris
+                    }) {
+                        Image(systemName: "star")
+                    }
                 }
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
     CandidatesListView(viewModel: CandidatesListViewModel())
+        .environmentObject(VState())
 }

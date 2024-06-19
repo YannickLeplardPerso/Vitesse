@@ -31,23 +31,42 @@ class LoginViewModel: ObservableObject {
         return true
     }
     
-    func login(vstate: VState) {
-        Task{ @MainActor in
-            do{
-                // "admin@vitesse.com", "test123"
-                let token = try await apiService.askForToken(for: VCredentials(email: email, password: password))
-                vstate.token = token.token
-                vstate.isAdmin = token.isAdmin
-            } catch let urlError as URLError {
-                switch urlError.code {
-                case .cannotConnectToHost:
-                    vstate.error = .CantConnectHost
-                default:
-                    vstate.error = .GenericURLError
-                }
-            } catch {
-                vstate.error = .RequestResponse
+    @MainActor
+    func login(vstate: VState) async {
+        do {
+            let vtoken = try await apiService.askForToken(for: VCredentials(email: email, password: password))
+            vstate.token = vtoken.token
+            vstate.isAdmin = vtoken.isAdmin
+        } catch let urlError as URLError {
+            switch urlError.code {
+            case .cannotConnectToHost:
+                vstate.error = .CantConnectHost
+            default:
+                vstate.error = .GenericURLError
             }
+        } catch let error as VError {
+            vstate.error = error
+        } catch {
+            vstate.error = .GenericError
+        }
+    }
+    
+    @MainActor
+    func candidatesList(vstate: VState) async {
+        do {
+            vstate.candidates = try await apiService.askForCandidatesList(from: vstate.token)
+        }
+        catch let urlError as URLError {
+            switch urlError.code {
+            case .cannotConnectToHost:
+                vstate.error = .CantConnectHost
+            default:
+                vstate.error = .GenericURLError
+            }
+        } catch let error as VError {
+            vstate.error = error
+        } catch {
+            vstate.error = .GenericError
         }
     }
 }

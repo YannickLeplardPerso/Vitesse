@@ -12,8 +12,9 @@ struct RegisterView: View {
     @EnvironmentObject var vstate: VState
     
     @State private var isOkForNewDestination: Bool = false
-    @State private var p1: String = ""
-    @State private var p2: String = ""
+    @State private var showingPopover = false
+//    @State private var p1: String = ""
+//    @State private var p2: String = ""
     
     var body: some View {
         NavigationStack {
@@ -24,25 +25,18 @@ struct RegisterView: View {
                 VStack(spacing: 20) {
                     VTitleText(text: "Register")
                     
-                    // ? groups are used for avoid the limit of 10 views in a stack
-                    Group {
-                        VTextField(title: "Email", text: $viewModel.email, error: vstate.error)
-                            .keyboardType(.emailAddress)
-                        
-                        VTextField(title: "First Name", text: $viewModel.firstName, error: vstate.error)
-                        
-                        VTextField(title: "LastName", text: $viewModel.lastName, error: vstate.error)
-                    }
+                    VTextField(title: "Email", text: $viewModel.email, error: $vstate.error)
+                        //.keyboardType(.emailAddress)
                     
-                    Group {
-
-                        
-                        VTextField(title: "Password", text: $p1, isSecure: true, error: vstate.error)
-                            .textContentType(.newPassword)
-                        
-                        VTextField(title: "Confirm Password", text: $p2, isSecure: true, error: vstate.error)
-                            .textContentType(.newPassword)
-                    }
+                    VTextField(title: "First Name", text: $viewModel.firstName, error: $vstate.error)
+                    
+                    VTextField(title: "LastName", text: $viewModel.lastName, error: $vstate.error)
+                    
+                    VTextField(title: "Password", text: $viewModel.newPassword, error: $vstate.error, isSecure: true)
+                    //.textContentType(.newPassword)
+                    
+                    VTextField(title: "Confirm Password", text: $viewModel.confirmNewPassword, error: $vstate.error, isSecure: true)
+                    //.textContentType(.newPassword)
                     
                     if vstate.error != .No {
                         VTextError(text: vstate.error.message)
@@ -50,20 +44,39 @@ struct RegisterView: View {
                     
                     VButton(action: {
                         if viewModel.allInformationsAreValid(vstate: vstate) {
-                            // in progress
-                            //viewModel.register(vstate: vstate)
-                            isOkForNewDestination = true
+                            Task { @MainActor in
+                                await viewModel.register(vstate: vstate)
+                                if vstate.error == .No {
+                                    showingPopover = true
+                                    //isOkForNewDestination = true
+                                }
+                            }
                         }
+                        showingPopover = true
                     }, title: "Create")
                     .padding(.top, 30)
+                    .popover(isPresented: $showingPopover) {
+                        VStack {
+                            Text("Utilisateur \(viewModel.firstName) \(viewModel.lastName) enregistré")
+                                .font(.headline)
+                                .foregroundColor(.green)
+                                .padding()
+                            Button("OK") {
+                                showingPopover = false
+                                isOkForNewDestination = true
+                            }
+                            .padding(.top, 10)
+                        }
+                        .padding()
+                    }
                     
                     Spacer()
                 }
                 .padding(.horizontal, 40)
             }
-            .onTapGesture {
-                //            self.endEditing(true)  // This will dismiss the keyboard when tapping outside
-            }
+//            .onTapGesture {
+//                self.endEditing(true)  // This will dismiss the keyboard when tapping outside
+//            }
             .navigationDestination(isPresented: $isOkForNewDestination) {
                 LoginView(viewModel: LoginViewModel())
             }

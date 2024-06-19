@@ -22,13 +22,13 @@ struct LoginView: View {
                 LinearGradient(gradient: Gradient(colors: [.viGradientTop, .viGradientBottom]), startPoint: .top, endPoint: .bottomLeading)
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack(spacing: 20) {                    
+                VStack(spacing: 20) {
                     VTitleText(text: "Login")
                     
-                    VTextField(title: "Email", text: $viewModel.email, error: vstate.error)
-                        .keyboardType(.emailAddress)
+                    VTextField(title: "Email", text: $viewModel.email, error: $vstate.error)
+                    //.keyboardType(.emailAddress)
                     
-                    VTextField(title: "Password", text: $viewModel.password, isSecure: true, error: vstate.error)
+                    VTextField(title: "Password", text: $viewModel.password, error: $vstate.error, isSecure: true)
                     Text("Forgot password ?")
                         .foregroundColor(.viLightText)
                         .font(.footnote)
@@ -38,12 +38,16 @@ struct LoginView: View {
                     if vstate.error != .No {
                         VTextError(text: vstate.error.message)
                     }
-                    
+                                        
                     VButton(action: {
                         if viewModel.emailAndPasswordAreValid(vstate: vstate) {
-                            viewModel.login(vstate: vstate)
-                            if vstate.token != "" {
-                                navigate(to: .CandidatesList)
+                            
+                            Task { @MainActor in
+                                await viewModel.login(vstate: vstate)
+                                await viewModel.candidatesList(vstate: vstate)
+                                if vstate.error == .No {
+                                    navigate(to: .CandidatesList)
+                                }
                             }
                         }
                     }, title: "Sign in")
@@ -57,23 +61,26 @@ struct LoginView: View {
                 }
                 .padding(.horizontal, 40)
             }
-//            .onTapGesture {
-//                self.endEditing(true)
-//            }
+            //            .onTapGesture {
+            //                self.endEditing(true)
+            //            }
             .navigationDestination(isPresented: $isOkForNewDestination) {
                 if destination == .CandidatesList {
                     CandidatesListView(viewModel: CandidatesListViewModel())
                 } else if destination == .Register {
                     RegisterView(viewModel: RegisterViewModel())
                 }
+                else {
+                    EmptyView()
+                }
             }
         }
     }
     
     private func navigate(to destination: VDestination) {
+        resetFields()
         self.destination = destination
         self.isOkForNewDestination = true
-        resetFields()
     }
     
     private func resetFields() {

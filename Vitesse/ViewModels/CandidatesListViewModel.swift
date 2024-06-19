@@ -7,11 +7,31 @@
 
 import Foundation
 
+
+
 class CandidatesListViewModel: ObservableObject {
     @Published var research: String = ""
-//    @Published var firstName: String = ""
-//    @Published var lastName: String = ""
-//    @Published var email: String = ""
-//    @Published var newPassword: String = ""
-//    @Published var confirmNewPassword: String = ""
+    //@Published var candidates = [VCandidate]()
+    
+    private var apiService = VAPIService()
+    
+//    func candidatesList(vstate: VState) async {
+//        do {
+//            print("1 candidates")
+//            vstate.candidates = try await apiService.askForCandidatesList(from: vstate.token)
+//            print("2 candidates")
+//        }
+//        catch let urlError as URLError {
+//            switch urlError.code {
+//            case .cannotConnectToHost:
+//                vstate.error = .CantConnectHost
+//            default:
+//                vstate.error = .GenericURLError
+//            }
+//        } catch let error as VError {
+//            vstate.error = error
+//        } catch {
+//            vstate.error = .GenericError
+//        }
+//    }
 }

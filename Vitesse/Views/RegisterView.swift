@@ -74,9 +74,6 @@ struct RegisterView: View {
                 }
                 .padding(.horizontal, 40)
             }
-//            .onTapGesture {
-//                self.endEditing(true)  // This will dismiss the keyboard when tapping outside
-//            }
             .navigationDestination(isPresented: $isOkForNewDestination) {
                 LoginView(viewModel: LoginViewModel())
             }

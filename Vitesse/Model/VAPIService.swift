@@ -59,7 +59,6 @@ class VAPIService {
         }
         switch httpResponse.statusCode {
         case 200:
-            print("token : 200")
             let token = try JSONDecoder().decode(VToken.self, from: data)
             return token
         case 401:
@@ -88,7 +87,6 @@ class VAPIService {
         }
         switch httpResponse.statusCode {
         case 201:
-            print("register : 201)")
             return
         case 401:
             throw VError.Unauthorized
@@ -105,51 +103,158 @@ class VAPIService {
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
-    // <- prend un token en paramètre
-    // -> retourne le détail du compte associé au token
+    // <- parameter is the token of the authenticated user
+    // -> return the list of candidates
     func askForCandidatesList(from token: String) async throws -> [VCandidate] {
         let (data, response) = try await session.data(for: createCandidatesListRequest(from: token))
         guard let httpResponse = response as? HTTPURLResponse else {
-            print("error request response")
             throw VError.RequestResponse
         }
         switch httpResponse.statusCode {
         case 200:
-            print("list of candidates : 200")
             let candidates = try JSONDecoder().decode([VCandidate].self, from: data)
             return candidates
         case 401:
-            print("error unauthorized")
             throw VError.Unauthorized
         default:
-            print("error request default")
             throw VError.RequestDefault
         }
     }
 
+    // get the detail of a candidate
+//    func createCandidateRequest(for id: String, from token: String) throws -> URLRequest {
+//        let stringURL = VAPIService.BASE_URL + "/candidate/" + id
+//        var request = URLRequest(url: URL(string: stringURL)!)
+//        request.httpMethod = "GET"
+//        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+//        return request
+//    }
+    // <- parameters are id of the candidate and token
+    // -> return detailed informations of the candidate
+//    func askForCandidate(for id: String, from token: String) async throws -> [VCandidate] {
+//        let (data, response) = try await session.data(for: createCandidateRequest(for: id, from: token))
+//        guard let httpResponse = response as? HTTPURLResponse else {
+//            throw VError.RequestResponse
+//        }
+//        switch httpResponse.statusCode {
+//        case 200:
+//            let candidates = try JSONDecoder().decode([VCandidate].self, from: data)
+//            return candidates
+//        case 401:
+//            throw VError.Unauthorized
+//        default:
+//            throw VError.RequestDefault
+//        }
+//    }
     
-    
-    
-    //
-//    // pour demander un transfert d'argent : réponse vide, mais code http = 200 si demande acceptée
-//    func createMoneyTransferRequest(from token: String, to auraTransferInfos: AuraTransferInfos ) throws -> URLRequest {
-//        let stringURL = AuraAPIService.BASE_URL + "/account/transfer"
+    // create a new candidate
+//    func createNewCandidateRequest(with informations: VCandidateInformations, from token: String) throws -> URLRequest {
+//        let stringURL = VAPIService.BASE_URL + "/candidate/"
 //        var request = URLRequest(url: URL(string: stringURL)!)
 //        request.httpMethod = "POST"
-//        request.setValue(token, forHTTPHeaderField: "token")
+//        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        let data = try JSONEncoder().encode(auraTransferInfos)
+//        let data = try JSONEncoder().encode(informations)
 //        request.httpBody = data
 //        return request
 //    }
-//    // <- prend un token en paramètre (demandeur) et les informations du transfert (email ou téléphone du destinataire et montant du transfert)
-//    // -> retourne true si la demande est acceptée
-//    func askForMoneyTransfer(from token: String, to auraTransferInfos: AuraTransferInfos) async throws -> Bool {
-//        let (_, response) = try await session.data(for: createMoneyTransferRequest(from: token, to: auraTransferInfos))
-//        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-//            throw AuraError.RequestResponse
+    // <- parameters are informations of the candidate and token
+    // -> return the candidate (VCandidate)
+//    func askForUpdateCandidate(for id: String, with informations: VCandidateInformations, from token: String) async throws -> VCandidate {
+//        let (data, response) = try await session.data(for: createNewCandidateRequest(with: informations, from: token))
+//        guard let httpResponse = response as? HTTPURLResponse else {
+//            throw VError.RequestResponse
 //        }
-//        return true
+//        switch httpResponse.statusCode {
+//        case 200:
+//            let candidate = try JSONDecoder().decode(VCandidate.self, from: data)
+//            return candidate
+//        case 401:
+//            throw VError.Unauthorized
+//        default:
+//            throw VError.RequestDefault
+//        }
 //    }
+    
+    // update informations of a candidate
+    func createUpdateCandidateRequest(for id: String, with informations: VCandidateInformations, from token: String) throws -> URLRequest {
+        let stringURL = VAPIService.BASE_URL + "/candidate/" + id
+        var request = URLRequest(url: URL(string: stringURL)!)
+        request.httpMethod = "PUT"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let data = try JSONEncoder().encode(informations)
+        request.httpBody = data
+        return request
+    }
+    // <- parameters are id of the candidate, informations of the candidate and token
+    // -> return the candidate (VCandidate) with new informations
+    func askForUpdateCandidate(for id: String, with informations: VCandidateInformations, from token: String) async throws -> VCandidate {
+        let (data, response) = try await session.data(for: createUpdateCandidateRequest(for: id, with: informations, from: token))
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw VError.RequestResponse
+        }
+        switch httpResponse.statusCode {
+        case 200:
+            let candidate = try JSONDecoder().decode(VCandidate.self, from: data)
+            return candidate
+        case 401:
+            throw VError.Unauthorized
+        default:
+            throw VError.RequestDefault
+        }
+    }
+    
+    // delete a candidate
+    func createDeleteCandidateRequest(for id: String, from token: String) throws -> URLRequest {
+        let stringURL = VAPIService.BASE_URL + "/candidate/" + id
+        var request = URLRequest(url: URL(string: stringURL)!)
+        request.httpMethod = "DELETE"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        return request
+    }
+    // <- parameters are id of the candidate and token
+    // -> return 200 if delete is ok
+    func askForDeleteCandidate(for id: String, from token: String) async throws {
+        let (_, response) = try await session.data(for: createDeleteCandidateRequest(for: id, from: token))
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw VError.RequestResponse
+        }
+        switch httpResponse.statusCode {
+        case 200:
+            return
+        case 401:
+            throw VError.Unauthorized
+        default:
+            throw VError.RequestDefault
+        }
+    }
+        
+    // toggle favorite status of a candidate (admin only!)
+    // !!! attention la doc API est fausse : c'est bien un POST et pas un PUT
+    func createToggleFavoriteStatusRequest(for id: String, from token: String) throws -> URLRequest {
+        let stringURL = VAPIService.BASE_URL + "/candidate/" + id + "/favorite"
+        var request = URLRequest(url: URL(string: stringURL)!)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        return request
+    }
+    // <- parameters are id of the candidate, informations of the candidate and token
+    // -> return the candidate (VCandidate) with new informations
+    func askForToggleFavoriteStatus(for id: String, from token: String) async throws -> VCandidate {
+        let (data, response) = try await session.data(for: createToggleFavoriteStatusRequest(for: id, from: token))
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw VError.RequestResponse
+        }
+        switch httpResponse.statusCode {
+        case 200:
+            let candidate = try JSONDecoder().decode(VCandidate.self, from: data)
+            return candidate
+        case 401:
+            throw VError.Unauthorized
+        default:
+            throw VError.RequestDefault
+        }
+    }
 }
 

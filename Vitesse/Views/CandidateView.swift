@@ -8,119 +8,142 @@
 import SwiftUI
 
 struct CandidateView: View {
-    let candidates = MockCandidatesList().all
+    let candidate: VCandidate
+    @ObservedObject var viewModel: CandidateViewModel
+    @EnvironmentObject var vstate: VState
+    
+    @State private var showSafari = false
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        let theCandidate = candidates[0]
-        
-        VStack {
-            // todo : transformer "vraie" ligne de navigation
-            HStack {
-                Button(action: {
-                }) {
-                    Image(systemName: "arrow.backward")
+        NavigationStack {
+            VStack {
+                
+                if vstate.error != .No {
+                    VTextError(text: vstate.error.message)
                 }
                 
-                Spacer()
-                
-                Button(action: {
-                    // fonction d'édition
-                }) {
-                    Text("Edit")
-                }
-            }
-            .padding()
-            
-            HStack {
-                Text("\(theCandidate.firstName) \(theCandidate.lastName)")
-                    .font(.title)
-                    .foregroundStyle(.cyan)
-                    .fontWeight(.semibold)
-                
-                Spacer()
-                
-                Button(action: {
-                    // pour modifier l'état de favori
-                }) {
-                    Image(systemName: theCandidate.isFavorite ? "star.fill" : "star")
-                }
-                // todo : si pas auth admin, bouton désactivé
-                .disabled(false)
-            }
-            .padding()
-            
-            HStack {
-                Text("Phone")
-                Text(theCandidate.phone)
-                    .font(.title3)
-                    .foregroundStyle(.cyan)
-                    .fontWeight(.semibold)
+                HStack {
+                    Text("\(candidate.firstName) \(candidate.lastName)")
+                        .font(.title2)
+                        .foregroundStyle(.cyan)
+                        .fontWeight(.semibold)
                     
-                Spacer()
-            }
-            .padding()
-            
-            HStack {
-                Text("Email")
-                Text(theCandidate.email)
-                    .font(.title3)
-                    .foregroundStyle(.cyan)
-                    .fontWeight(.semibold)
+                    Spacer()
                     
-                Spacer()
-            }
-            .padding()
-            
-            HStack {
-                Text("LinkedIn")
-                if let urlString = theCandidate.linkedinURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                   let url = URL(string: urlString) {
                     Button(action: {
-                        UIApplication.shared.open(url)
+                        Task { @MainActor in
+                            await viewModel.toggleFavoriteStatus(candidate: candidate, vstate: vstate)
+                        }
                     }) {
-                        Text("Go on LinkedIn")
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                            .background(Color.cyan.opacity(0.4))
-                            .cornerRadius(8)
-                            
+                        Image(systemName: candidate.isFavorite ? "star.fill" : "star")
                     }
+                    .disabled(vstate.isAdmin ? false : true)
+                }
+                .padding()
+                
+                HStack {
+                    Text("Phone")
+                    Text(candidate.phone)
+                        .foregroundStyle(.cyan)
+                        .fontWeight(.semibold)
+                        
+                    Spacer()
+                }
+                .padding()
+                
+                HStack {
+                    Text("Email")
+                    Text(candidate.email)
+                        .foregroundStyle(.cyan)
+                        .fontWeight(.semibold)
+                        
+                    Spacer()
+                }
+                .padding()
+                
+                HStack {
+                    Text("LinkedIn")
+                    if let urlString = candidate.linkedinURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                       let url = URL(string: urlString) {
+                        Button(action: {
+                            showSafari = true
+                        }) {
+                            Text("Go on LinkedIn")
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 5)
+                                .background(Color.cyan.opacity(0.4))
+                                .cornerRadius(8)
+                                
+                        }
+                        .sheet(isPresented: $showSafari) {
+                            SafariView(url: url)
+                        }
+                    }
+                    
+                    
+                    Spacer()
+                }
+                .padding()
+                
+                HStack {
+                    Text("Note")
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.top)
+                
+                if candidate.note != nil {
+                    Text(candidate.note ?? "")
+                        .font(.title3)
+                        .foregroundStyle(.cyan)
+                        .fontWeight(.semibold)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .background(RoundedRectangle(cornerRadius: 8))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.cyan, lineWidth: 2)
+                        )
+                        .padding()
                 }
                 
-                
                 Spacer()
             }
-            .padding()
-            
-            HStack {
-                Text("Note")
-                Spacer()
-            }
-            .padding(.horizontal)
-            .padding(.top)
-            //.padding()
-            
-            if theCandidate.note != nil {
-                Text(theCandidate.note ?? "")
-                    .font(.title3)
-                    .foregroundStyle(.cyan)
-                    .fontWeight(.semibold)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(8)
-                    .background(RoundedRectangle(cornerRadius: 8))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.cyan, lineWidth: 2)
-                    )
-                    .padding()
-            }
-            
-            Spacer()
         }
+        .navigationBarItems(
+            leading: Button(action: {
+                dismiss()
+            }) {
+                Image(systemName: "arrow.backward")
+            },
+            trailing: NavigationLink(destination: CandidateEditView()) {
+                Text("Edit")
+            }
+        )
+        .navigationBarBackButtonHidden()
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarLeading) {
+//                Button(action: {
+//                    dismiss()
+//                }) {
+//                    Image(systemName: "arrow.backward")
+//                }
+//            }
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button(action: {
+//                    //todo : mode édition des informations du candidat
+//                }) {
+//                    Text("Edit")
+//                }
+//            }
+//        }
+//        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    CandidateView()
+    CandidateView(candidate:  MockCandidatesList().all.first!, viewModel: CandidateViewModel())
+        .environmentObject(VState())
 }

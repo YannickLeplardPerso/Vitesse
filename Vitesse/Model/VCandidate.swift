@@ -15,7 +15,18 @@ struct VCandidate: Identifiable, Codable {
     let lastName: String
     var email: String
     var phone: String
+    var isFavorite: Bool
+    var linkedinURL: String?
+    var note: String?
+}
+
+struct VCandidateInformations: Codable {
+    let firstName: String
+    let lastName: String
+    var email: String
+    var phone: String
     let isFavorite: Bool
     var linkedinURL: String?
     var note: String?
 }
+

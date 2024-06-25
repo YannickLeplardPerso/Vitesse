@@ -61,9 +61,6 @@ struct LoginView: View {
                 }
                 .padding(.horizontal, 40)
             }
-            //            .onTapGesture {
-            //                self.endEditing(true)
-            //            }
             .navigationDestination(isPresented: $isOkForNewDestination) {
                 if destination == .CandidatesList {
                     CandidatesListView(viewModel: CandidatesListViewModel())

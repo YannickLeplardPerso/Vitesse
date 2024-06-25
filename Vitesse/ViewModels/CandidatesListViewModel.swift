@@ -11,27 +11,21 @@ import Foundation
 
 class CandidatesListViewModel: ObservableObject {
     @Published var research: String = ""
-    //@Published var candidates = [VCandidate]()
     
-    private var apiService = VAPIService()
-    
-//    func candidatesList(vstate: VState) async {
-//        do {
-//            print("1 candidates")
-//            vstate.candidates = try await apiService.askForCandidatesList(from: vstate.token)
-//            print("2 candidates")
-//        }
-//        catch let urlError as URLError {
-//            switch urlError.code {
-//            case .cannotConnectToHost:
-//                vstate.error = .CantConnectHost
-//            default:
-//                vstate.error = .GenericURLError
-//            }
-//        } catch let error as VError {
-//            vstate.error = error
-//        } catch {
-//            vstate.error = .GenericError
-//        }
-//    }
+    func filter(showOnlyFavorites: Bool, candidates: [VCandidate]) -> [VCandidate] {
+        var filteredCandidates = candidates
+        
+        if !research.isEmpty {
+            filteredCandidates = candidates.filter { candidate in
+                        candidate.firstName.lowercased().contains(research.lowercased()) ||
+                        candidate.lastName.lowercased().contains(research.lowercased())
+                    }
+                }
+        
+        if showOnlyFavorites {
+            filteredCandidates = filteredCandidates.filter { $0.isFavorite }
+        }
+            
+        return filteredCandidates
+    }
 }

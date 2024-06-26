@@ -34,6 +34,10 @@
 		ACED6C2C2C18A88900F60714 /* VTexttError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACED6C2B2C18A88900F60714 /* VTexttError.swift */; };
 		ACED6C2E2C18D72900F60714 /* VNewUserInformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACED6C2D2C18D72900F60714 /* VNewUserInformations.swift */; };
 		ACED6C302C18EC7700F60714 /* VDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACED6C2F2C18EC7700F60714 /* VDestination.swift */; };
+		ACEF33672C2AF69500C71607 /* VText.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEF33662C2AF69500C71607 /* VText.swift */; };
+		ACEF33692C2AFC7200C71607 /* VSubText.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEF33682C2AFC7200C71607 /* VSubText.swift */; };
+		ACEF336B2C2B011700C71607 /* VLabelText.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEF336A2C2B011700C71607 /* VLabelText.swift */; };
+		ACEF336D2C2B09AA00C71607 /* CandidateEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEF336C2C2B09AA00C71607 /* CandidateEditViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +69,10 @@
 		ACED6C2B2C18A88900F60714 /* VTexttError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTexttError.swift; sourceTree = "<group>"; };
 		ACED6C2D2C18D72900F60714 /* VNewUserInformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNewUserInformations.swift; sourceTree = "<group>"; };
 		ACED6C2F2C18EC7700F60714 /* VDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDestination.swift; sourceTree = "<group>"; };
+		ACEF33662C2AF69500C71607 /* VText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VText.swift; sourceTree = "<group>"; };
+		ACEF33682C2AFC7200C71607 /* VSubText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSubText.swift; sourceTree = "<group>"; };
+		ACEF336A2C2B011700C71607 /* VLabelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLabelText.swift; sourceTree = "<group>"; };
+		ACEF336C2C2B09AA00C71607 /* CandidateEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateEditViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +131,7 @@
 				AC4E44022C14B63D0024EE52 /* RegisterViewModel.swift */,
 				AC4E44042C14B63D0024EE52 /* CandidatesListViewModel.swift */,
 				AC4E44142C1504B00024EE52 /* CandidateViewModel.swift */,
+				ACEF336C2C2B09AA00C71607 /* CandidateEditViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -168,6 +177,9 @@
 			isa = PBXGroup;
 			children = (
 				AC641CE32C178F7500644E9F /* VTitleText.swift */,
+				ACEF33662C2AF69500C71607 /* VText.swift */,
+				ACEF33682C2AFC7200C71607 /* VSubText.swift */,
+				ACEF336A2C2B011700C71607 /* VLabelText.swift */,
 				AC641CE52C17903B00644E9F /* VTextField.swift */,
 				AC641CE82C179C5E00644E9F /* VButton.swift */,
 				ACED6C2B2C18A88900F60714 /* VTexttError.swift */,
@@ -247,9 +259,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC641CD22C16D78700644E9F /* CandidateEditView.swift in Sources */,
+				ACEF336B2C2B011700C71607 /* VLabelText.swift in Sources */,
 				AC4E44072C14B63D0024EE52 /* CandidatesListViewModel.swift in Sources */,
 				ACED6C2E2C18D72900F60714 /* VNewUserInformations.swift in Sources */,
 				AC641CDF2C178A0600644E9F /* VCredentials.swift in Sources */,
+				ACEF336D2C2B09AA00C71607 /* CandidateEditViewModel.swift in Sources */,
 				ACED6C2C2C18A88900F60714 /* VTexttError.swift in Sources */,
 				AC641CE92C179C5E00644E9F /* VButton.swift in Sources */,
 				AC4E440F2C14B7310024EE52 /* MockCandidatesList.swift in Sources */,
@@ -263,12 +277,14 @@
 				AC4E44152C1504B00024EE52 /* CandidateViewModel.swift in Sources */,
 				AC4E44132C1504950024EE52 /* CandidateView.swift in Sources */,
 				AC4E44112C14B7A00024EE52 /* VCandidate.swift in Sources */,
+				ACEF33692C2AFC7200C71607 /* VSubText.swift in Sources */,
 				AC641CE42C178F7500644E9F /* VTitleText.swift in Sources */,
 				AC641CD62C16F9BF00644E9F /* VError.swift in Sources */,
 				AC4E44052C14B63D0024EE52 /* RegisterViewModel.swift in Sources */,
 				AC4E43F22C14B48F0024EE52 /* VitesseApp.swift in Sources */,
 				ACACDF132C2335CA0090F690 /* VSafariView.swift in Sources */,
 				ACED6C302C18EC7700F60714 /* VDestination.swift in Sources */,
+				ACEF33672C2AF69500C71607 /* VText.swift in Sources */,
 				AC641CDD2C1788BA00644E9F /* VCheck.swift in Sources */,
 				AC641CD42C16F2E600644E9F /* VAPIService.swift in Sources */,
 			);
@@ -402,7 +418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "6 in progress";
+				CURRENT_PROJECT_VERSION = "7 in progress";
 				DEVELOPMENT_ASSET_PATHS = "\"Vitesse/Preview Content\"";
 				DEVELOPMENT_TEAM = 9L643QCQAN;
 				ENABLE_PREVIEWS = YES;
@@ -431,7 +447,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "6 in progress";
+				CURRENT_PROJECT_VERSION = "7 in progress";
 				DEVELOPMENT_ASSET_PATHS = "\"Vitesse/Preview Content\"";
 				DEVELOPMENT_TEAM = 9L643QCQAN;
 				ENABLE_PREVIEWS = YES;

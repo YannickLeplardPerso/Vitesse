@@ -13,6 +13,8 @@ enum VError: Error {
     case RequestDefault
     case RequestResponse
     case InvalidEmail
+    case InvalidPhoneNumber
+    case InvalidLinkedInURL
     case Empty
     case PasswordsDoNotMatch
     case InvalidName
@@ -27,11 +29,15 @@ extension VError {
     var message: String {
         switch self {
         case .RequestResponse:
-            return "Request response."
+            return "Error request response."
         case .RequestDefault:
             return "Request error."
         case .InvalidEmail:
             return "Invalid email address."
+        case .InvalidPhoneNumber:
+            return "Invalid phone number."
+        case .InvalidLinkedInURL:
+            return "Invalid LinkedIn URL."
         case .Empty:
             return "All the fields must be filled."
         case .InvalidName:

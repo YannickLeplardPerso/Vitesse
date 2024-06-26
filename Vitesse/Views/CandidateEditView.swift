@@ -8,14 +8,52 @@
 import SwiftUI
 
 struct CandidateEditView: View {
-    //@ObservedObject var viewModel: CandidateViewModel
+    let candidate: VCandidate
+    @StateObject var viewModel = CandidateEditViewModel()
+    @EnvironmentObject var vstate: VState
     
     @Environment(\.dismiss) var dismiss
     
+//    init(candidate: VCandidate) {
+//        self.candidate = candidate
+//        viewModel.candidateEditInformations = VCandidateEditInformations(
+//            email: candidate.email,
+//            phone: candidate.phone,
+//            linkedInURL: candidate.linkedInURL ?? "",
+//            note: candidate.note ?? ""
+//        )
+//    }
+        
     var body: some View {
         NavigationStack {
             VStack {
+                if vstate.error != .No {
+                    VTextError(text: vstate.error.message)
+                }
                 
+                HStack {
+                    VText(text: "\(candidate.firstName) \(candidate.lastName)")
+                    Spacer()
+                }
+                .padding(.vertical)
+                
+                VStack {
+                    VTextField(title: "Phone", text: $viewModel.candidateEditInformations.phone, error: $vstate.error)
+                    VTextField(title: "Email", text: $viewModel.candidateEditInformations.email, error: $vstate.error)
+                    VTextField(title: "LinkedIn", text: $viewModel.candidateEditInformations.linkedinURL, error: $vstate.error)
+                    
+                    VLabelText(text: "Note")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 10)
+                    TextEditor(text: $viewModel.candidateEditInformations.note)
+                        .scrollContentBackground(.hidden)
+                        .padding(8)
+                        .background(.quaternary)
+                        .cornerRadius(8)
+                        .frame(height: 200)
+                }
+                
+                Spacer()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -27,7 +65,14 @@ struct CandidateEditView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        //
+                        if viewModel.allInformationsAreValid(vstate: vstate) {
+                        }
+                        Task { @MainActor in
+                            await viewModel.updateInformations(candidate: candidate, vstate: vstate)
+                            if vstate.error == .No {
+                                dismiss()
+                            }
+                        }
                     }) {
                         Text("Done")
                     }
@@ -36,108 +81,18 @@ struct CandidateEditView: View {
             .navigationBarBackButtonHidden()
         }
         .padding(.horizontal)
+        .onAppear() {
+            viewModel.candidateEditInformations = VCandidateEditInformations(
+                email: candidate.email,
+                phone: candidate.phone,
+                linkedinURL: candidate.linkedinURL ?? "",
+                note: candidate.note ?? ""
+            )
+        }
     }
 }
 
 #Preview {
-    //CandidateEditView(viewModel: CandidateViewModel())
-    CandidateEditView()
+    CandidateEditView(candidate:  MockCandidatesList().all.first!)
+        .environmentObject(VState())
 }
-
-
-//NavigationStack {
-//    VStack {
-//        HStack {
-//            Text("\(viewModel.candidate.firstName) \(viewModel.candidate.lastName)")
-//                .font(.title)
-//                .foregroundStyle(.cyan)
-//                .fontWeight(.semibold)
-//            
-//            Spacer()
-//        }
-//        .padding(.bottom)
-//        
-//        VStack {
-//            Text("Phone")
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//            TextField("Phone", text: $viewModel.candidate.phone)
-//                .padding()
-//                .background(Color(UIColor.secondarySystemBackground))
-//                .font(.title3)
-//                .foregroundStyle(.cyan)
-//                .fontWeight(.semibold)
-//                .cornerRadius(8)
-//                .background(
-//                    RoundedRectangle(cornerRadius: 8)
-//                )
-//                .autocapitalization(.none)
-//                .keyboardType(.emailAddress)
-//                .disableAutocorrection(true)
-//                .padding(.bottom, 20)
-//        }
-//        
-//        VStack {
-//            Text("Email")
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//            TextField("Phone", text: $viewModel.candidate.email)
-//                .padding()
-//                .background(Color(UIColor.secondarySystemBackground))
-//                .font(.title3)
-//                .foregroundStyle(.cyan)
-//                .fontWeight(.semibold)
-//                .cornerRadius(8)
-//                .background(
-//                    RoundedRectangle(cornerRadius: 8)
-//                )
-//                .autocapitalization(.none)
-//                .keyboardType(.emailAddress)
-//                .disableAutocorrection(true)
-//                .padding(.bottom, 20)
-//        }
-//        
-//        VStack {
-//            Text("LinkedIn")
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//            
-//            TextField("LinkedIn", text: Binding(
-//                get: { viewModel.candidate.linkedinURL ?? "" },
-//                set: { viewModel.candidate.linkedinURL = $0.isEmpty ? nil : $0 }))
-//            .padding()
-//            .background(Color(UIColor.secondarySystemBackground))
-//            .font(.title3)
-//            .foregroundStyle(.cyan)
-//            .fontWeight(.semibold)
-//            .cornerRadius(8)
-//            .background(
-//                RoundedRectangle(cornerRadius: 8)
-//            )
-//            .autocapitalization(.none)
-//            .keyboardType(.emailAddress)
-//            .disableAutocorrection(true)
-//            .padding(.bottom, 20)
-//        }
-//        
-//        VStack {
-//            Text("Note")
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//            
-//            TextEditor(text: Binding(
-//                get: { viewModel.candidate.note ?? "" },
-//                set: { viewModel.candidate.note = $0.isEmpty ? nil : $0 }))
-//            //.frame(minHeight: 100)
-//            //.background(Color(UIColor.secondarySystemBackground))
-//            .font(.title3)
-//            .foregroundStyle(.cyan)
-//            .overlay(
-//                RoundedRectangle(cornerRadius: 8)
-//                    .stroke(Color.cyan, lineWidth: 2)
-//            )
-//            .autocapitalization(.none)
-//            .keyboardType(.emailAddress)
-//            .disableAutocorrection(true)
-//        }
-//        
-//        Spacer()
-//    }
-//}
-//.padding(.horizontal)

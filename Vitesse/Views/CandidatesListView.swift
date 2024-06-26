@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct CandidatesListView: View {
-    @ObservedObject var viewModel: CandidatesListViewModel
+    @StateObject var viewModel = CandidatesListViewModel()
     @EnvironmentObject var vstate: VState
     
     @State private var showOnlyFavorites = false
@@ -29,14 +29,12 @@ struct CandidatesListView: View {
                 }
                 .border(.viText)
                 .padding(.horizontal)
-                
-                //let candidates = vstate.candidates
-                //let candidates = MockCandidatesList().all
+
                 let candidates = viewModel.filter(showOnlyFavorites: showOnlyFavorites, candidates:  vstate.candidates)
                 List {
                     ForEach(candidates) { candidate in
                         ZStack {
-                            NavigationLink(destination: CandidateView(candidate: candidate, viewModel: CandidateViewModel())) {
+                            NavigationLink(destination: CandidateView(candidate: candidate)) {
                                 EmptyView()
                             }
                             HStack {
@@ -60,7 +58,7 @@ struct CandidatesListView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        // fonction d'édition
+                        // delete candidate(s)
                     }) {
                         Text("Edit")
                     }
@@ -71,7 +69,6 @@ struct CandidatesListView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        // affiche uniquement les favoris
                         showOnlyFavorites.toggle()
                     }) {
                         Image(systemName: showOnlyFavorites ? "star.fill" : "star")

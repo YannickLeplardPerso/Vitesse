@@ -26,7 +26,6 @@ struct LoginView: View {
                     VTitleText(text: "Login")
                     
                     VTextField(title: "Email", text: $viewModel.email, error: $vstate.error)
-                    //.keyboardType(.emailAddress)
                     
                     VTextField(title: "Password", text: $viewModel.password, error: $vstate.error, isSecure: true)
                     Text("Forgot password ?")
@@ -63,9 +62,9 @@ struct LoginView: View {
             }
             .navigationDestination(isPresented: $isOkForNewDestination) {
                 if destination == .CandidatesList {
-                    CandidatesListView(viewModel: CandidatesListViewModel())
+                    CandidatesListView()
                 } else if destination == .Register {
-                    RegisterView(viewModel: RegisterViewModel())
+                    RegisterView()
                 }
                 else {
                     EmptyView()

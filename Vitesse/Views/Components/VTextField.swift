@@ -15,7 +15,7 @@ struct VTextField: View {
     let isSecure: Bool
     @Binding var error: VError
     
-    // pour pouvoir avoir une valeur par défaut pour isSecure et rendre le paramètre optionnel pour un "simple" TextField
+    // to force a default value for isSecure and make this parameter optional
     init(title: String, text: Binding<String>, error: Binding<VError>, isSecure: Bool = false) {
         self.title = title
         self._text = text
@@ -25,15 +25,14 @@ struct VTextField: View {
     
     var body: some View {
         VStack {
-            Text(title)
-                .foregroundColor(.viText)
+            VLabelText(text: title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 10)
             Group {
                 if isSecure {
-                    SecureField(title, text: $text)
+                    SecureField("", text: $text)
                 } else {
-                    TextField(title, text: $text)
+                    TextField("", text: $text)
                 }
             }
             .padding()

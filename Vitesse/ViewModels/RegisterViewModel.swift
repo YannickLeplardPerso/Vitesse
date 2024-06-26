@@ -19,7 +19,6 @@ class RegisterViewModel: ObservableObject {
     func allInformationsAreValid(vstate: VState) -> Bool {
         // all the fields must be filled
         let fields = [email, firstName, lastName, newPassword, confirmNewPassword]
-        print(email, firstName, lastName, newPassword, confirmNewPassword)
         if fields.contains(where: { $0.isEmpty }) {
             vstate.error = .Empty
             return false

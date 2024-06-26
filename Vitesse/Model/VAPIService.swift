@@ -82,6 +82,7 @@ class VAPIService {
     // -> return code = 201 if the new user is created
     func registerNewUser(for userInformations: VNewUserInformations) async throws {
         let (_, response) = try await session.data(for: createRegisterRequest(for: userInformations))
+        print(response)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
             throw VError.RequestResponse
         }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CandidateView: View {
     let candidate: VCandidate
-    @ObservedObject var viewModel: CandidateViewModel
+    @StateObject var viewModel = CandidateViewModel()
     @EnvironmentObject var vstate: VState
     
     @State private var showSafari = false
@@ -24,11 +24,8 @@ struct CandidateView: View {
                 }
                 
                 HStack {
-                    Text("\(candidate.firstName) \(candidate.lastName)")
-                        .font(.title2)
-                        .foregroundStyle(.cyan)
-                        .fontWeight(.semibold)
-                    
+                    VText(text: "\(candidate.firstName) \(candidate.lastName)")
+
                     Spacer()
                     
                     Button(action: {
@@ -43,27 +40,22 @@ struct CandidateView: View {
                 .padding()
                 
                 HStack {
-                    Text("Phone")
-                    Text(candidate.phone)
-                        .foregroundStyle(.cyan)
-                        .fontWeight(.semibold)
-                        
+                    VLabelText(text: "Phone ")
+                    VSubText(text: candidate.phone)
                     Spacer()
                 }
                 .padding()
                 
                 HStack {
-                    Text("Email")
-                    Text(candidate.email)
-                        .foregroundStyle(.cyan)
-                        .fontWeight(.semibold)
-                        
+                    VLabelText(text: "Email ")
+                    VSubText(text: candidate.email)
                     Spacer()
                 }
                 .padding()
                 
                 HStack {
-                    Text("LinkedIn")
+                    VLabelText(text: "LinkedIn ")
+                    
                     if let urlString = candidate.linkedinURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                        let url = URL(string: urlString) {
                         Button(action: {
@@ -81,24 +73,21 @@ struct CandidateView: View {
                         }
                     }
                     
-                    
                     Spacer()
                 }
                 .padding()
                 
                 HStack {
-                    Text("Note")
+                    VLabelText(text: "Note ")
                     Spacer()
                 }
                 .padding(.horizontal)
                 .padding(.top)
                 
                 if candidate.note != nil {
-                    Text(candidate.note ?? "")
-                        .font(.title3)
-                        .foregroundStyle(.cyan)
-                        .fontWeight(.semibold)
-                        .padding()
+                    VSubText(text: candidate.note ?? "")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding() // for text inside the rounded rectangle
                         .background(Color.white)
                         .cornerRadius(8)
                         .background(RoundedRectangle(cornerRadius: 8))
@@ -106,7 +95,7 @@ struct CandidateView: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.cyan, lineWidth: 2)
                         )
-                        .padding()
+                        .padding(.horizontal) // for the rounded rectangle
                 }
                 
                 Spacer()
@@ -118,11 +107,20 @@ struct CandidateView: View {
             }) {
                 Image(systemName: "arrow.backward")
             },
-            trailing: NavigationLink(destination: CandidateEditView()) {
+            trailing: NavigationLink(destination: CandidateEditView(candidate: candidate)) {
                 Text("Edit")
             }
         )
         .navigationBarBackButtonHidden()
+    }
+}
+
+#Preview {
+    CandidateView(candidate:  MockCandidatesList().all.first!, viewModel: CandidateViewModel())
+        .environmentObject(VState())
+}
+
+
 //        .toolbar {
 //            ToolbarItem(placement: .navigationBarLeading) {
 //                Button(action: {
@@ -133,17 +131,10 @@ struct CandidateView: View {
 //            }
 //            ToolbarItem(placement: .navigationBarTrailing) {
 //                Button(action: {
-//                    //todo : mode édition des informations du candidat
+//                    NavigationLink(destination: CandidateEditView(candidate: candidate, viewModel: CandidateViewModel()))
 //                }) {
 //                    Text("Edit")
 //                }
 //            }
 //        }
 //        .navigationBarBackButtonHidden()
-    }
-}
-
-#Preview {
-    CandidateView(candidate:  MockCandidatesList().all.first!, viewModel: CandidateViewModel())
-        .environmentObject(VState())
-}

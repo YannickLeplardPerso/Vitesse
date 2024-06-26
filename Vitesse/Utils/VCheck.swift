@@ -32,10 +32,19 @@ struct VCheck {
         return (predicateFr.evaluate(with: phoneNumber) || predicateInter.evaluate(with: phoneNumber))
     }
     
+    // pour vérifier une adresse linkedIn
+    // format : commence par https://www.linkedin.com/in/
+    static func validLinkedinURL(_ url: String) -> Bool {
+        let regex = "^https://www\\.linkedin\\.com/in/[^\\s/]+/?$"
+        //let regex = "^https:\\/\\/www\\.linkedin\\.com\\/in\\/[^\\s\\/]+\\/?$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return predicate.evaluate(with: url)
+    }
+    
     // pour vérifier un nom
     // format : uniquement des lettres (et ^ assure que le champ commence par une lettre, $ qu'il finit par une lettre)
     static func validName(_ name: String) -> Bool {
-        let regEx = "^[A-Za-z]+$"
+        let regEx = "^[A-Za-z]+(-[A-Za-z]+)*$"
         let predicate = NSPredicate(format:"SELF MATCHES %@", regEx)
         return predicate.evaluate(with: name)
     }

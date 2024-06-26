@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @StateObject var viewModel: RegisterViewModel
+    @StateObject var viewModel = RegisterViewModel()
     @EnvironmentObject var vstate: VState
     
     @State private var isOkForNewDestination: Bool = false
     @State private var showingPopover = false
-//    @State private var p1: String = ""
-//    @State private var p2: String = ""
     
     var body: some View {
         NavigationStack {
@@ -26,17 +24,14 @@ struct RegisterView: View {
                     VTitleText(text: "Register")
                     
                     VTextField(title: "Email", text: $viewModel.email, error: $vstate.error)
-                        //.keyboardType(.emailAddress)
                     
                     VTextField(title: "First Name", text: $viewModel.firstName, error: $vstate.error)
                     
                     VTextField(title: "LastName", text: $viewModel.lastName, error: $vstate.error)
                     
                     VTextField(title: "Password", text: $viewModel.newPassword, error: $vstate.error, isSecure: true)
-                    //.textContentType(.newPassword)
                     
                     VTextField(title: "Confirm Password", text: $viewModel.confirmNewPassword, error: $vstate.error, isSecure: true)
-                    //.textContentType(.newPassword)
                     
                     if vstate.error != .No {
                         VTextError(text: vstate.error.message)
@@ -48,11 +43,9 @@ struct RegisterView: View {
                                 await viewModel.register(vstate: vstate)
                                 if vstate.error == .No {
                                     showingPopover = true
-                                    //isOkForNewDestination = true
                                 }
                             }
                         }
-                        showingPopover = true
                     }, title: "Create")
                     .padding(.top, 30)
                     .popover(isPresented: $showingPopover) {
@@ -76,6 +69,7 @@ struct RegisterView: View {
             }
             .navigationDestination(isPresented: $isOkForNewDestination) {
                 LoginView(viewModel: LoginViewModel())
+                    .navigationBarBackButtonHidden(true) 
             }
         }
     }

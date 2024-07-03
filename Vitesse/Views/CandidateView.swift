@@ -119,22 +119,3 @@ struct CandidateView: View {
     CandidateView(candidate:  MockCandidatesList().all.first!, viewModel: CandidateViewModel())
         .environmentObject(VState())
 }
-
-
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarLeading) {
-//                Button(action: {
-//                    dismiss()
-//                }) {
-//                    Image(systemName: "arrow.backward")
-//                }
-//            }
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button(action: {
-//                    NavigationLink(destination: CandidateEditView(candidate: candidate, viewModel: CandidateViewModel()))
-//                }) {
-//                    Text("Edit")
-//                }
-//            }
-//        }
-//        .navigationBarBackButtonHidden()

@@ -15,7 +15,5 @@ struct VLabelText: View {
     var body: some View {
         Text(text)
             .foregroundColor(.viText)
-            //.frame(maxWidth: .infinity, alignment: .leading)
-            //.padding(.top, 10)
     }
 }

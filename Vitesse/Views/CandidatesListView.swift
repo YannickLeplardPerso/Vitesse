@@ -14,7 +14,11 @@ struct CandidatesListView: View {
     @EnvironmentObject var vstate: VState
     
     @State private var showOnlyFavorites = false
-            
+    
+    @State private var isEditing = false
+    @State private var selectedCandidates = Set<VCandidate>()
+    
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -31,6 +35,7 @@ struct CandidatesListView: View {
                 .padding(.horizontal)
 
                 let candidates = viewModel.filter(showOnlyFavorites: showOnlyFavorites, candidates:  vstate.candidates)
+                //List(candidates, id: \.self, selection: $selectedCandidates) { candidate in
                 List {
                     ForEach(candidates) { candidate in
                         ZStack {
@@ -38,6 +43,17 @@ struct CandidatesListView: View {
                                 EmptyView()
                             }
                             HStack {
+                                if isEditing {
+                                    Image(systemName: selectedCandidates.contains(candidate) ? "checkmark.circle.fill" : "circle")
+                                        .foregroundColor(.viBackground)
+                                        .onTapGesture {
+                                            if selectedCandidates.contains(candidate) {
+                                                selectedCandidates.remove(candidate)
+                                            } else {
+                                                selectedCandidates.insert(candidate)
+                                            }
+                                        }
+                                }
                                 Text("\(candidate.firstName) \(candidate.lastName)")
                                     .foregroundStyle(.viLightText)
                                     .fontWeight(.semibold)
@@ -58,9 +74,13 @@ struct CandidatesListView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        // delete candidate(s)
+                        vstate.error = .No
+                        isEditing.toggle()
+                        if !isEditing {
+                            selectedCandidates.removeAll()
+                        }
                     }) {
-                        Text("Edit")
+                        Text(isEditing ? "Cancel" : "Edit")
                     }
                 }
                 ToolbarItem(placement: .principal) {
@@ -69,9 +89,28 @@ struct CandidatesListView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        showOnlyFavorites.toggle()
+                        vstate.error = .No
+                        if isEditing {
+                            Task {
+                                for candidate in selectedCandidates {
+                                    await viewModel.deleteCandidate(candidate: candidate, vstate: vstate)
+                                    if vstate.error == .No, let index = vstate.candidates.firstIndex(where: { $0.id == candidate.id }) {
+                                        vstate.candidates.remove(at: index)
+                                    }
+                                }
+                                selectedCandidates.removeAll()
+                                isEditing.toggle()
+                            }
+                        } else {
+                            showOnlyFavorites.toggle()
+                        }
                     }) {
-                        Image(systemName: showOnlyFavorites ? "star.fill" : "star")
+                        if isEditing {
+                            Text("Delete")
+                        } else {
+                            Image(systemName: showOnlyFavorites ? "star.fill" : "star")
+                        }
+                        
                     }
                 }
             }
@@ -79,6 +118,34 @@ struct CandidatesListView: View {
         .navigationBarBackButtonHidden()
     }
 }
+
+
+//                List(candidates, id: \.self, selection: $selectedCandidates) { candidate in
+//                    ZStack {
+
+//                        HStack {
+//                            if isEditing {
+//                                Image(systemName: selectedCandidates.contains(candidate) ? "checkmark.circle.fill" : "circle")
+//                                    .foregroundColor(.viBackground)
+//                                    .onTapGesture {
+//                                        if selectedCandidates.contains(candidate) {
+//                                            selectedCandidates.remove(candidate)
+//                                        } else {
+//                                            selectedCandidates.insert(candidate)
+//                                        }
+//                                    }
+//                            }
+//                            Text("\(candidate.firstName) \(candidate.lastName)")
+//                                .foregroundStyle(.viLightText)
+//                                .fontWeight(.semibold)
+//                            
+
+//                    }
+//                }
+//                
+//                Spacer()
+//            }
+
 
 #Preview {
     CandidatesListView(viewModel: CandidatesListViewModel())

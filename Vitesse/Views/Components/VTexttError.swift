@@ -14,7 +14,7 @@ struct VTextError: View {
     
     var body: some View {
         Text(text)
-            .foregroundStyle(.red)
+            .foregroundColor(.red)
     }
 }
 

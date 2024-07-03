@@ -35,12 +35,12 @@ struct VTextField: View {
                     TextField("", text: $text)
                 }
             }
-            .padding()
+            .padding() //text inside field
             .background(.viBackgroundField)
             .cornerRadius(8)
-            .background(
+            .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(error != .No ? .red : Color(.viBackgroundField), lineWidth: 1)
+                    .stroke(error != .No ? Color.red : Color.viBackgroundField, lineWidth: 1)
             )
             .autocapitalization(.none)
             .disableAutocorrection(true)

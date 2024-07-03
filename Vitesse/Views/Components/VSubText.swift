@@ -14,7 +14,7 @@ struct VSubText: View {
     
     var body: some View {
         Text(text)
-            .foregroundStyle(.cyan)
+            .foregroundColor(.cyan)
             .fontWeight(.semibold)
     }
 }

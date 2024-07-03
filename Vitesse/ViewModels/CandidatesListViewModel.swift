@@ -12,6 +12,8 @@ import Foundation
 class CandidatesListViewModel: ObservableObject {
     @Published var research: String = ""
     
+    private var apiService = VAPIService()
+    
     func filter(showOnlyFavorites: Bool, candidates: [VCandidate]) -> [VCandidate] {
         var filteredCandidates = candidates
         
@@ -27,5 +29,24 @@ class CandidatesListViewModel: ObservableObject {
         }
             
         return filteredCandidates
+    }
+    
+    @MainActor
+    func deleteCandidate(candidate: VCandidate, vstate: VState) async {
+        do {
+            try await apiService.askForDeleteCandidate(for: candidate.id, from: vstate.token)
+        }
+        catch let urlError as URLError {
+            switch urlError.code {
+            case .cannotConnectToHost:
+                vstate.error = .CantConnectHost
+            default:
+                vstate.error = .GenericURLError
+            }
+        } catch let error as VError {
+            vstate.error = error
+        } catch {
+            vstate.error = .GenericError
+        }
     }
 }

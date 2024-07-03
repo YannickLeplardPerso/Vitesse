@@ -9,7 +9,7 @@ import Foundation
 
 
 
-struct VCandidate: Identifiable, Codable {
+struct VCandidate: Identifiable, Codable, Hashable {
     let id: String
     let firstName: String
     let lastName: String

@@ -13,16 +13,6 @@ struct CandidateEditView: View {
     @EnvironmentObject var vstate: VState
     
     @Environment(\.dismiss) var dismiss
-    
-//    init(candidate: VCandidate) {
-//        self.candidate = candidate
-//        viewModel.candidateEditInformations = VCandidateEditInformations(
-//            email: candidate.email,
-//            phone: candidate.phone,
-//            linkedInURL: candidate.linkedInURL ?? "",
-//            note: candidate.note ?? ""
-//        )
-//    }
         
     var body: some View {
         NavigationStack {

@@ -12,6 +12,11 @@ import Foundation
 class CandidateViewModel: ObservableObject {
     private var apiService = VAPIService()
     
+    // for test purpose only
+    init(apiService: VAPIService = VAPIService()) {
+        self.apiService = apiService
+    }
+    
     @MainActor
     func toggleFavoriteStatus(candidate: VCandidate, vstate: VState) async {
         do {

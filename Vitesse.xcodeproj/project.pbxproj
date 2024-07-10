@@ -20,6 +20,11 @@
 		AC4E44112C14B7A00024EE52 /* VCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44102C14B7A00024EE52 /* VCandidate.swift */; };
 		AC4E44132C1504950024EE52 /* CandidateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44122C1504950024EE52 /* CandidateView.swift */; };
 		AC4E44152C1504B00024EE52 /* CandidateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4E44142C1504B00024EE52 /* CandidateViewModel.swift */; };
+		AC5996662C3E62230024F6F0 /* VAPIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5996652C3E62230024F6F0 /* VAPIServiceTests.swift */; };
+		AC59966B2C3E63550024F6F0 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59966A2C3E63550024F6F0 /* NetworkSession.swift */; };
+		AC59966D2C3E90E40024F6F0 /* CandidateViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59966C2C3E90E40024F6F0 /* CandidateViewModelTests.swift */; };
+		AC59966F2C3EB27B0024F6F0 /* MockVAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59966E2C3EB27B0024F6F0 /* MockVAPIService.swift */; };
+		AC5996712C3EC6180024F6F0 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5996702C3EC6180024F6F0 /* MockURLSession.swift */; };
 		AC641CD22C16D78700644E9F /* CandidateEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CD12C16D78700644E9F /* CandidateEditView.swift */; };
 		AC641CD42C16F2E600644E9F /* VAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CD32C16F2E600644E9F /* VAPIService.swift */; };
 		AC641CD62C16F9BF00644E9F /* VError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC641CD52C16F9BF00644E9F /* VError.swift */; };
@@ -40,6 +45,16 @@
 		ACEF336D2C2B09AA00C71607 /* CandidateEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEF336C2C2B09AA00C71607 /* CandidateEditViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AC5996602C3E61B30024F6F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC4E43E62C14B48F0024EE52 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC4E43ED2C14B48F0024EE52;
+			remoteInfo = Vitesse;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		AC4E43EE2C14B48F0024EE52 /* Vitesse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitesse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4E43F12C14B48F0024EE52 /* VitesseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitesseApp.swift; sourceTree = "<group>"; };
@@ -55,6 +70,12 @@
 		AC4E44102C14B7A00024EE52 /* VCandidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCandidate.swift; sourceTree = "<group>"; };
 		AC4E44122C1504950024EE52 /* CandidateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateView.swift; sourceTree = "<group>"; };
 		AC4E44142C1504B00024EE52 /* CandidateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateViewModel.swift; sourceTree = "<group>"; };
+		AC59965C2C3E61B30024F6F0 /* VitesseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VitesseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC5996652C3E62230024F6F0 /* VAPIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAPIServiceTests.swift; sourceTree = "<group>"; };
+		AC59966A2C3E63550024F6F0 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		AC59966C2C3E90E40024F6F0 /* CandidateViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateViewModelTests.swift; sourceTree = "<group>"; };
+		AC59966E2C3EB27B0024F6F0 /* MockVAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVAPIService.swift; sourceTree = "<group>"; };
+		AC5996702C3EC6180024F6F0 /* MockURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		AC641CD12C16D78700644E9F /* CandidateEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateEditView.swift; sourceTree = "<group>"; };
 		AC641CD32C16F2E600644E9F /* VAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAPIService.swift; sourceTree = "<group>"; };
 		AC641CD52C16F9BF00644E9F /* VError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VError.swift; sourceTree = "<group>"; };
@@ -83,6 +104,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AC5996592C3E61B30024F6F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -98,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				AC4E43EE2C14B48F0024EE52 /* Vitesse.app */,
+				AC59965C2C3E61B30024F6F0 /* VitesseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,6 +139,7 @@
 				AC4E44012C14B5F90024EE52 /* Model */,
 				AC4E43FF2C14B5DB0024EE52 /* ViewModels */,
 				AC4E44002C14B5ED0024EE52 /* Views */,
+				AC5996572C3E60EF0024F6F0 /* Tests */,
 				AC4E43F52C14B48F0024EE52 /* Assets.xcassets */,
 				AC4E43F72C14B48F0024EE52 /* Preview Content */,
 			);
@@ -161,10 +191,30 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		AC641CDB2C17888800644E9F /* Utils */ = {
+		AC5996572C3E60EF0024F6F0 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				AC5996702C3EC6180024F6F0 /* MockURLSession.swift */,
+				AC59966E2C3EB27B0024F6F0 /* MockVAPIService.swift */,
+				AC5996652C3E62230024F6F0 /* VAPIServiceTests.swift */,
+				AC59966C2C3E90E40024F6F0 /* CandidateViewModelTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		AC5996692C3E63310024F6F0 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
 				AC4E440E2C14B7310024EE52 /* MockCandidatesList.swift */,
+				AC59966A2C3E63550024F6F0 /* NetworkSession.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		AC641CDB2C17888800644E9F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AC5996692C3E63310024F6F0 /* Mock */,
 				AC641CDC2C1788BA00644E9F /* VCheck.swift */,
 				AC641CDE2C178A0600644E9F /* VCredentials.swift */,
 				AC641CE02C178A3100644E9F /* VToken.swift */,
@@ -208,6 +258,24 @@
 			productReference = AC4E43EE2C14B48F0024EE52 /* Vitesse.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AC59965B2C3E61B30024F6F0 /* VitesseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC5996622C3E61B30024F6F0 /* Build configuration list for PBXNativeTarget "VitesseTests" */;
+			buildPhases = (
+				AC5996582C3E61B30024F6F0 /* Sources */,
+				AC5996592C3E61B30024F6F0 /* Frameworks */,
+				AC59965A2C3E61B30024F6F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC5996612C3E61B30024F6F0 /* PBXTargetDependency */,
+			);
+			name = VitesseTests;
+			productName = VitesseTests;
+			productReference = AC59965C2C3E61B30024F6F0 /* VitesseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -220,6 +288,10 @@
 				TargetAttributes = {
 					AC4E43ED2C14B48F0024EE52 = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					AC59965B2C3E61B30024F6F0 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = AC4E43ED2C14B48F0024EE52;
 					};
 				};
 			};
@@ -237,6 +309,7 @@
 			projectRoot = "";
 			targets = (
 				AC4E43ED2C14B48F0024EE52 /* Vitesse */,
+				AC59965B2C3E61B30024F6F0 /* VitesseTests */,
 			);
 		};
 /* End PBXProject section */
@@ -248,6 +321,13 @@
 			files = (
 				AC4E43F92C14B48F0024EE52 /* Preview Assets.xcassets in Resources */,
 				AC4E43F62C14B48F0024EE52 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC59965A2C3E61B30024F6F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,10 +367,30 @@
 				ACEF33672C2AF69500C71607 /* VText.swift in Sources */,
 				AC641CDD2C1788BA00644E9F /* VCheck.swift in Sources */,
 				AC641CD42C16F2E600644E9F /* VAPIService.swift in Sources */,
+				AC59966B2C3E63550024F6F0 /* NetworkSession.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC5996582C3E61B30024F6F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC5996712C3EC6180024F6F0 /* MockURLSession.swift in Sources */,
+				AC59966D2C3E90E40024F6F0 /* CandidateViewModelTests.swift in Sources */,
+				AC5996662C3E62230024F6F0 /* VAPIServiceTests.swift in Sources */,
+				AC59966F2C3EB27B0024F6F0 /* MockVAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC5996612C3E61B30024F6F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC4E43ED2C14B48F0024EE52 /* Vitesse */;
+			targetProxy = AC5996602C3E61B30024F6F0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AC4E43FA2C14B48F0024EE52 /* Debug */ = {
@@ -418,7 +518,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "8 in progress";
+				CURRENT_PROJECT_VERSION = "9 in progress";
 				DEVELOPMENT_ASSET_PATHS = "\"Vitesse/Preview Content\"";
 				DEVELOPMENT_TEAM = 9L643QCQAN;
 				ENABLE_PREVIEWS = YES;
@@ -447,7 +547,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "8 in progress";
+				CURRENT_PROJECT_VERSION = "9 in progress";
 				DEVELOPMENT_ASSET_PATHS = "\"Vitesse/Preview Content\"";
 				DEVELOPMENT_TEAM = 9L643QCQAN;
 				ENABLE_PREVIEWS = YES;
@@ -470,6 +570,42 @@
 			};
 			name = Release;
 		};
+		AC5996632C3E61B30024F6F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L643QCQAN;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leplard.VitesseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vitesse.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vitesse";
+			};
+			name = Debug;
+		};
+		AC5996642C3E61B30024F6F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9L643QCQAN;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leplard.VitesseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vitesse.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vitesse";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -487,6 +623,15 @@
 			buildConfigurations = (
 				AC4E43FD2C14B48F0024EE52 /* Debug */,
 				AC4E43FE2C14B48F0024EE52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC5996622C3E61B30024F6F0 /* Build configuration list for PBXNativeTarget "VitesseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC5996632C3E61B30024F6F0 /* Debug */,
+				AC5996642C3E61B30024F6F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

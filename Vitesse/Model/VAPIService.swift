@@ -21,7 +21,13 @@ import Foundation
 class VAPIService {
     static let BASE_URL = "http://127.0.0.1:8080"
     
-    private let session = URLSession.shared
+//    private let session = URLSession.shared
+    // pour pouvoir faire de l'injection de dépendance
+    let session: NetworkSession
+
+    init(session: NetworkSession = URLSession.shared) {
+        self.session = session
+    }
     
     // API running test : request must return "It works!"
     func createIsRunningOkRequest() -> URLRequest {
@@ -54,9 +60,11 @@ class VAPIService {
     // -> return token and a boolean to indicate that the user is admin
     func askForToken(for id: VCredentials) async throws -> VToken {
         let (data, response) = try await session.data(for: createTokenRequest(for: id))
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
             throw VError.RequestResponse
         }
+        
         switch httpResponse.statusCode {
         case 200:
             let token = try JSONDecoder().decode(VToken.self, from: data)
@@ -82,10 +90,11 @@ class VAPIService {
     // -> return code = 201 if the new user is created
     func registerNewUser(for userInformations: VNewUserInformations) async throws {
         let (_, response) = try await session.data(for: createRegisterRequest(for: userInformations))
-        print(response)
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
+
+        guard let httpResponse = response as? HTTPURLResponse else {
             throw VError.RequestResponse
         }
+        
         switch httpResponse.statusCode {
         case 201:
             return
@@ -108,9 +117,11 @@ class VAPIService {
     // -> return the list of candidates
     func askForCandidatesList(from token: String) async throws -> [VCandidate] {
         let (data, response) = try await session.data(for: createCandidatesListRequest(from: token))
+        
         guard let httpResponse = response as? HTTPURLResponse else {
             throw VError.RequestResponse
         }
+        
         switch httpResponse.statusCode {
         case 200:
             let candidates = try JSONDecoder().decode([VCandidate].self, from: data)
@@ -192,9 +203,11 @@ class VAPIService {
     // -> return the candidate (VCandidate) with new informations
     func askForUpdateCandidate(for id: String, with informations: VCandidateInformations, from token: String) async throws -> VCandidate {
         let (data, response) = try await session.data(for: createUpdateCandidateRequest(for: id, with: informations, from: token))
+        
         guard let httpResponse = response as? HTTPURLResponse else {
             throw VError.RequestResponse
         }
+        
         switch httpResponse.statusCode {
         case 200:
             let candidate = try JSONDecoder().decode(VCandidate.self, from: data)
@@ -218,9 +231,11 @@ class VAPIService {
     // -> return 200 if delete is ok
     func askForDeleteCandidate(for id: String, from token: String) async throws {
         let (_, response) = try await session.data(for: createDeleteCandidateRequest(for: id, from: token))
+        
         guard let httpResponse = response as? HTTPURLResponse else {
             throw VError.RequestResponse
         }
+        
         switch httpResponse.statusCode {
         case 200:
             return
@@ -244,9 +259,11 @@ class VAPIService {
     // -> return the candidate (VCandidate) with new informations
     func askForToggleFavoriteStatus(for id: String, from token: String) async throws -> VCandidate {
         let (data, response) = try await session.data(for: createToggleFavoriteStatusRequest(for: id, from: token))
+        
         guard let httpResponse = response as? HTTPURLResponse else {
             throw VError.RequestResponse
         }
+        
         switch httpResponse.statusCode {
         case 200:
             let candidate = try JSONDecoder().decode(VCandidate.self, from: data)
